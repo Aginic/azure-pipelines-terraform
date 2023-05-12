@@ -46,6 +46,24 @@ describe('Terraform Test Suite', () => {
         }
     });
 
+    it('azure init should succeed overriding subscription', (done: MochaDone) => {
+        let tp = path.join(__dirname, './InitTests/Azure/AzureInitSuccessOverrideSubscriptionId.js');
+        let tr: ttm.MockTestRunner = new ttm.MockTestRunner(tp);
+        try {
+            tr.run();
+
+            assert(tr.succeeded, 'task should have succeeded');
+            assert(tr.invokedToolCount === 1, 'tool should have been invoked one time. actual: ' + tr.invokedToolCount);
+            assert(tr.errorIssues.length === 0, 'should have no errors');
+            assert(tr.warningIssues.length === 0, 'should have no warnings');
+            assert(tr.stdOutContained('AzureInitSuccessOverrideSubscriptionIdL0 should have succeeded.'), 'Should have printed: AzureInitSuccessOverrideSubscriptionIdL0 should have succeeded.');
+
+            done();
+        } catch(error) {
+            done(error);
+        }
+    });
+
     it('azure init should succeed with empty working directory', (done: MochaDone) => {
         let tp = path.join(__dirname, './InitTests/Azure/AzureInitSuccessEmptyWorkingDir.js');
         let tr: ttm.MockTestRunner = new ttm.MockTestRunner(tp);

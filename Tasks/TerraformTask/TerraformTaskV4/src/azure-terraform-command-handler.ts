@@ -17,7 +17,8 @@ export class TerraformCommandHandlerAzureRM extends BaseTerraformCommandHandler 
         this.backendConfig.set('container_name', tasks.getInput("backendAzureRmContainerName", true));
         this.backendConfig.set('key', tasks.getInput("backendAzureRmKey", true));
         this.backendConfig.set('resource_group_name', tasks.getInput("backendAzureRmResourceGroupName", true));
-        this.backendConfig.set('subscription_id', tasks.getEndpointDataParameter(backendServiceName, "subscriptionid", true));
+        const subscriptionId = tasks.getInput("backendAzureRmSubscriptionId", true) ?? tasks.getEndpointDataParameter(backendServiceName, "subscriptionid", true);
+        this.backendConfig.set('subscription_id', subscriptionId);
         this.backendConfig.set('tenant_id', tasks.getEndpointAuthorizationParameter(backendServiceName, "tenantid", true));
         
         if(serviceprincipalid && serviceprincipalkey) {

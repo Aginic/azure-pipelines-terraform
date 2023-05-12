@@ -172,6 +172,17 @@
             "groupName": "backendAzureRm"
         },
         {
+            "name": "backendAzureRmSubscriptionId",
+            "type": "pickList",
+            "label": "Subscription ID",
+            "required": false,
+            "helpMarkDown": "The ID of the subscription which contains the storage account selected below (overrides the service connection).",
+            "groupName": "backendAzureRm",
+            "properties": {
+                "EditableOptions": "True"
+            }
+        },
+        {
             "name": "backendAzureRmResourceGroupName",
             "type": "pickList",
             "label": "Resource group",
